@@ -5,6 +5,6 @@ import react from "@vitejs/plugin-react";
 // If you rename the repo, update this value.
 export default defineConfig({
   plugins: [react()],
-  base: "/actualizador-planner/",
+  base: "/actexcop/",
   server: { open: true }
 });
