@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checklist Pruebas · Agente IA Troubleshooting</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <h1>Checklist Pruebas · Agente IA Troubleshooting</h1>
+        <p class="subtitle">Registro de iteraciones de prueba con exportación a Excel</p>
+      </div>
+      <div class="actions">
+        <button id="addRowBtn" class="btn btn-primary">+ Añadir iteración</button>
+        <button id="exportBtn" class="btn btn-secondary">Exportar .xlsx</button>
+        <button id="resetBtn" class="btn btn-danger">Vaciar tabla</button>
+      </div>
+    </header>
+
+    <section class="stats">
+      <div class="stat-card">
+        <span class="stat-label">Total</span>
+        <span id="totalStat" class="stat-value">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">OK</span>
+        <span id="okStat" class="stat-value ok">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">NOK</span>
+        <span id="nokStat" class="stat-value nok">0</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-label">% OK</span>
+        <span id="okPctStat" class="stat-value">0%</span>
+      </div>
+    </section>
+
+    <section class="table-wrap">
+      <table id="checklistTable">
+        <thead>
+          <tr>
+            <th class="col-codigo">Código</th>
+            <th class="col-fallo">Nº fallo</th>
+            <th>Pregunta / Prompt</th>
+            <th>Respuesta esperada</th>
+            <th>Respuesta del agente</th>
+            <th class="col-estado">Estado</th>
+            <th class="col-delete">Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <template id="rowTemplate">
+    <tr>
+      <td>
+        <input type="text" class="cell-input code-input" placeholder="Ej. TEST1, QA_099, NB-7" maxlength="60" />
+        <div class="field-hint">Debe terminar en 1 a 3 dígitos</div>
+      </td>
+      <td>
+        <input type="text" class="cell-input" data-field="fallo" placeholder="Ej. 3.2 / Fault 17" />
+      </td>
+      <td>
+        <textarea class="cell-textarea" data-field="prompt" placeholder="Describe la prueba o pregunta realizada"></textarea>
+      </td>
+      <td>
+        <textarea class="cell-textarea" data-field="esperada" placeholder="Resultado esperado"></textarea>
+      </td>
+      <td>
+        <textarea class="cell-textarea" data-field="respuesta" placeholder="Respuesta obtenida del agente"></textarea>
+      </td>
+      <td>
+        <button class="status-btn status-empty" type="button">Pendiente</button>
+      </td>
+      <td>
+        <button class="icon-btn delete-btn" type="button" title="Eliminar fila">✕</button>
+      </td>
+    </tr>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
